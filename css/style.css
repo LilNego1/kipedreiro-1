@@ -18,10 +18,10 @@
         justify-content: space-evenly;
         padding: 40px 0;
         background: #979797;
-        color: rgb(95, 47, 1);
+        color: rgb(92, 91, 89);
         text-align: left;
         border-style: ridge;
-        border-color: rgb(156, 88, 5);
+        border-color: rgb(99, 99, 99);
     }
     main{
         max-width: 100%;
@@ -32,18 +32,6 @@
         display: flex;
         list-style: none;
     }
-    
-    .navbar-desktop{
-        display: flex;
-        justify-content: flex-start;
-        gap: 10%;
-        margin-top: 50px;
-    }
-    
-    .navbar-mobile{
-    display: none;
-    }
-    
     a{
         text-decoration: none;
         color: #FFFF00;
@@ -85,4 +73,9 @@
     }
     .cor{
         color: #FFFF00;
+    }
+    .navbar-desktop{
+        display: flex;
+        justify-content: flex-start;
+        gap: 5%;
     }

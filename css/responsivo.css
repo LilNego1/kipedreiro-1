@@ -1,23 +1,88 @@
 
-
+.linha-menu-top, .linha-menu-bottom{
+    height: 5px;
+    width: 50px;
+    background-color: rgb(53, 175, 145);
+    margin-top: 10px;
+}
+.menu-toggle{
+    display: none;
+}
 /* media query
 se a largura for até 768 faça */
 @media (max-width: 768px){
     .navbar-desktop{
+        opacity: 0;
+        flex-direction: column;
+        transition: transform 0.3s ease-in-out;
+        transform: translateY(-100%);
+    }
+    .menu-icon{
+        display: block;
+        position: absolute;
+        right: 0;
+        margin: 10px;
+    }
+    /* checado atua no ~ = irmão */
+    .menu-toggle:checked ~ .navbar-desktop{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        position: absolute;
+        top: -15px;
+        left: 0px;
+        background-color: rgba(190, 117, 20, 0.493);
+        transition: all 0.3s ease;
+        opacity: 1;
+        transform: translateY(15%);
+        height: 100vh;
+    }
+    .menu-toggle:checked ~ .menu-icon .linha-menu-top{
+        transform: translateY(10px) rotate(45deg);
+    }
+    .menu-toggle:checked ~ .menu-icon .linha-menu-bottom{
+        transform: translateY(-10px) rotate(-45deg);
+    }
+    .menu-toggle:checked ~ .menu-icon .linha-menu-center{
         display: none;
     }
-    .navbar-mobile{
-        display: flex;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        left: 0;
-        justify-content: space-evenly;
-        padding: 10px;
-        height: 60px;
-        background-color: #474A4F;
+    header{
+    /* medidas relativas
+    % de 0 ao infinito
+    % vh viewport altura
+      vw viewport largura*/
+       display: flex;
     }
-}
-@media (max-width: 460px){
-    
+    nav{
+        display: none;
+    }
+    main{
+        max-width: 95%;
+    }
+    .menu-icon{
+        display: block;
+        position: absolute;
+        bottom: 10%;
+        right: 5px;
+        margin: 10px;
+        width: 60px;
+        height: 60px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .linha-menu-top, .linha-menu-bottom{
+        display: block;
+        width: 100%;
+        height: 9px;
+        background-color: rgb(53, 175, 145);
+        margin: 10px 0;
+    }
+    .linha-menu-center{
+        display: block;
+        background-color: rgb(53, 175, 145);
+        width: 115%;
+        height: 9px;
+        margin: 5px 0;
+    }
 }
