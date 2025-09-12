@@ -1,6 +1,6 @@
 <?php
 include_once 'backend/usuario.php';
-include_once 'backend/database/database.php';
+include_once 'backend/model/database.php';
 $nome = $_POST["nome"] ?? '';
 $email = $_POST["email"] ?? '';
 $senha = $_POST["senha"] ?? '';

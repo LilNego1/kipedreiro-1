@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,28 +8,39 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsivo.css">
     <link rel="stylesheet" href="Fontes/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="contato.css">
 </head>
+
 <body>
     <header id="navbar">
     </header>
     <main>
         <section>
-            <Form action="enviaemail.php" method="post">
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" required>
+            <div class="container">
+                <h2>Contato</h2>
+            <Form action="enviarcntt.php" method="post" class="forms">
+                <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Nome</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1">
+                </div>
+                <div class="mb-3">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
-                <label for="senha">senha:</label>
-                <input type="password" id="senha" name="senha" required>
-                <button type="submit">enviar</button> 
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Assunto</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <button type="submit">enviar</button>
 
                 </label>
 
 
 
             </Form>
+            </div>
             <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione sunt unde voluptatum quasi earum obcaecati adipisci, minima velit labore nihil minus aperiam nobis dolor, aliquam, voluptatibus distinctio harum suscipit voluptatem?
+
             </p>
         </section>
         <div class="botao-flutuante cor"><i class="fa fa-whatsapp fa-2x" aria-hidden="true"></i></div>
@@ -39,4 +51,5 @@
     <script src="js/navbar.js" defer></script>
     <script src="js/app.js" defer></script>
 </body>
+
 </html>

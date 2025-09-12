@@ -6,7 +6,6 @@ function BuscaUsuarios($db){
     $sql = 'SELECT nome_usuario, email_usuario FROM tbl_usuario';
     $statment = $db->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
     $statment->execute();
-    $resultado = $statment->fetchAll();
     return $resultado = $statment->fetchAll();
 
 }
@@ -17,6 +16,14 @@ function RegistraUsuario($db, $nome, $email, $senha){
     $statment->bindParam(':nome', $nome);
     $statment->bindParam(':email', $email);
     $statment->bindParam(':senha', $senha);
+    return $statment->execute();
+    
+}
+
+function BuscaUsuariosPorID($db,$id){
+    $sql = 'SELECT nome_usuario, email_usuario FROM tbl_usuario WHERE id_usuario = :id';
+    $statment = $db->prepare($sql);
+    $statment->bindParam(':id', $id);
     return $statment->execute();
     
 }
