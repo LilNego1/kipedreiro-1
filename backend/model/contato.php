@@ -1,4 +1,6 @@
 <?php
+namespace App\Backend\Model;
+use PDO;
 
 
 /* Executa uma instrução preparada passando um array de valores */

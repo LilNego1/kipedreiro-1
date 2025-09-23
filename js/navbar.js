@@ -1,5 +1,5 @@
 const nav = document.getElementById("navbar");
-nav.innerHTML = ` <img src="img/KiPedreiro.svg" alt="kipedreiro" class="logo">
+nav.innerHTML = ` <img src="img/KiPedreiro.svg" alt="KiPedreiro" class="logo">
 
         <input type="checkbox" id="menu-toggle" class="menu-toggle">
         <label for="menu-toggle" class="menu-icon">
@@ -17,6 +17,6 @@ nav.innerHTML = ` <img src="img/KiPedreiro.svg" alt="kipedreiro" class="logo">
             <a href="contato.html">Contato</a>
         <ul>
             <a href="https://www.instagram.com/"><img src="img/instagram-svgrepo-com.svg" alt="linkinsta" class="redes cor"></a>
-            <a href="https://web.whatsapp.com/"><img src="img/whatsapp-svgrepo-com.svg" alt="linkwhatsapp" class="redes cor"></a>
+            <a href="https://web.whatsApp.com/"><img src="img/whatsApp-svgrepo-com.svg" alt="linkwhatsApp" class="redes cor"></a>
         </ul>
     </nav>`;

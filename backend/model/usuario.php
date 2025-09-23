@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Backend\Model;
+use PDO;
+
 class Usuario{
     private $id_usuario;
     private $nome_usuario;
@@ -13,30 +16,31 @@ class Usuario{
     private $db;
     //construtor inicializa a classe e/ou atributos
     public function __construct($db){
+        $this->nome_usuario = 'lucas';
         $this->db = $db;
     }
 
 /* Executa uma instrução preparada passando um array de valores */
-function BuscaUsuarios($db){
+function buscaUsuarios(){
     
     $sql = 'SELECT nome_usuario, email_usuario FROM tbl_usuario';
-    $statment = $db->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
+    $statment = $this->db->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
     $statment->execute();
     return $resultado = $statment->fetchAll();
 
 }
-function BuscaUsuarioPorEmail($db,$email){
+function buscaUsuarioPorEmail($email = ''){
     $sql = 'SELECT nome_usuario, email_usuario FROM tbl_usuario WHERE email_usuario = :email';
-    $statment = $db->prepare($sql);
+    $statment = $this->db->prepare($sql);
     $statment->bindParam(':email', $email);
     $statment->execute();
     return $resultado = $statment->fetchAll();
     
 }
-function RegistraUsuario($db, $nome, $email, $senha){
+function RegistraUsuario( $nome, $email, $senha){
     $sql = 'INSERT INTO tbl_usuario (nome_usuario, email_usuario, senha_usuario) 
     VALUES (:nome, :email, :senha)';
-    $statment = $db->prepare($sql);
+    $statment = $this->db->prepare($sql);
     $statment->bindParam(':nome', $nome);
     $statment->bindParam(':email', $email);
     $statment->bindParam(':senha',password_hash( $senha, PASSWORD_bCRYPT));
@@ -82,9 +86,9 @@ function atualizarUsuario($id, $nome, $email, $senha = null, $tipo = null, $stat
         return $stmt->execute();
     }
 }
-function BuscaUsuariosPorID($db,$id){
+function buscaUsuariosPorID($id){
     $sql = 'SELECT nome_usuario, email_usuario FROM tbl_usuario WHERE id_usuario = :id';
-    $statment = $db->prepare($sql);
+    $statment = $this->db->prepare($sql);
     $statment->bindParam(':id', $id);
     return $statment->execute();
     
