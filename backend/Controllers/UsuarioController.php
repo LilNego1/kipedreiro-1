@@ -19,4 +19,36 @@ class UsuarioController {
         return $resultado;
         // Example method code here
     }
+
+    public function viewListarUsuarios() {
+        echo "listar Usuarios";
+        
+    }
+    public function viewCriarUsuarios() {
+        echo "Criar Usuarios";
+        
+    }
+    public function viewEditarUsuarios() {
+        echo "Editar Usuarios";
+        
+    }
+    public function viewExcluirUsuarios() {
+        echo "Excluir Usuarios";
+        
+    }
+    public function salvarUsuarios() {
+        echo "Salvar Usuarios";
+        
+    }
+    public function atualizarUsuarios() {
+        echo "atualizar Usuarios";
+        
+    }public function deletarUsuarios() {
+        echo "deletar Usuarios";
+        
+    }
+
+
+
+
 }
