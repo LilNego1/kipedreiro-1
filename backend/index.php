@@ -9,11 +9,23 @@ $rotas = Rotas::get();
     
 $metodoHttp = $_SERVER["REQUEST_METHOD"];
 $rota = $_SERVER['REQUEST_URI'];
+if(array_key_exists($rota, $rotas[ $metodoHttp ]) == false){
+    http_response_code(404);
+    echo "Rota n encontrada";
+    exit;
+}
+
 
 $partes = explode("@", $rotas[ $metodoHttp ][$rota]);
 $nomeController = $partes[0];
 $metodoController = $partes[1];
 $nomecompletoController = "App\\Backend\\Controllers\\". $nomeController;
+if(!class_exists($nomecompletoController)){
+    http_response_code(500);
+    echo "Controlador não encontrada";
+    exit;
+
+}
 $controller = new $nomecompletoController();
 $controller->$metodoController();
 

@@ -3,6 +3,7 @@ namespace App\Backend\Controllers;
 
 use App\Backend\Model\Usuario;
 use App\Backend\Database\Database;
+use App\Backend\Core\View;
 
 class UsuarioController {
     public $usuario;
@@ -21,19 +22,20 @@ class UsuarioController {
     }
 
     public function viewListarUsuarios() {
-        echo "listar Usuarios";
+        $dados = $this->usuario->buscaUsuarios();
+        View::render("usuario/index", ["usuarios" => $dados]);
         
     }
     public function viewCriarUsuarios() {
-        echo "Criar Usuarios";
+        View::render("usuario/create");
         
     }
     public function viewEditarUsuarios() {
-        echo "Editar Usuarios";
+        View::render("usuario/edit");
         
     }
     public function viewExcluirUsuarios() {
-        echo "Excluir Usuarios";
+        View::render("usuario/delete");
         
     }
     public function salvarUsuarios() {
