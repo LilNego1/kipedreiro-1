@@ -4,6 +4,8 @@ namespace App\Backend\Controllers;
 use App\Backend\Model\Usuario;
 use App\Backend\Database\Database;
 use App\Backend\Core\View;
+use App\Kipedreiro\Core\Redirect;
+use App\Kipedreiro\Validadores\UsuarioValidador;
 
 class UsuarioController {
     public $usuario;
@@ -39,7 +41,24 @@ class UsuarioController {
         
     }
     public function salvarUsuarios() {
-        echo "Salvar Usuarios";
+        UsuarioValidador::validarEntradas($_POST);
+        if(!empty($erros)){
+            Redirect::redirecionarComMensagem("usuario/create", "erro", implode("<br>", $erros));
+            
+        }
+         if($this->usuario->inserirUsuario(
+            $_POST["nome_usuario"],
+            $_POST["email_usuario"],
+            $_POST["senha_usuario"],
+            $_POST["tipo_usuario"],
+            "ativo"
+         
+         )){
+            Redirect::redirecionarComMensagem("usuario/listar", "sucesso", "Usuario cadastrado com sucesso!!");
+         }else{
+            Redirect::redirecionarComMensagem("usuario/create", "erro", "Erro ao cadastrar usuario, tente novamente!!");
+         };
+        
         
     }
     public function atualizarUsuarios() {

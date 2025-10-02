@@ -1,7 +1,9 @@
 <?php
 namespace App\Backend;
 use App\Backend\Rotas\Rotas;
-
+ if (!isset($_SESSION)) {
+            session_start();
+ }
 require __DIR__ .'/../vendor/autoload.php';
 
 
