@@ -6,13 +6,16 @@ use App\Backend\Database\Database;
 use App\Backend\Core\View;
 use App\Kipedreiro\Core\Redirect;
 use App\Kipedreiro\Validadores\UsuarioValidador;
+use App\Backend\Core\FileManager;
 
 class UsuarioController {
     public $usuario;
     public $db;
+    public $gerenciarImagem;
     public function __construct() {
         $this->db = Database:: getInstance();
         $this->usuario = new Usuario($this->db);
+        $this->gerenciarImagem = new FileManager('upload');
         
     }
         // metodos de sla oq
@@ -32,13 +35,21 @@ class UsuarioController {
         View::render("usuario/create");
         
     }
-    public function viewEditarUsuarios() {
-        View::render("usuario/edit");
+    public function viewEditarUsuarios($id) {
+        $dados = $this->usuario-> buscaUsuariosPorID($id);
+        foreach($dados as $usuario){
+            $dados = $usuario;
+        }
+        View::render("usuario/edit", ["id_usuario" => $dados]);
         
     }
-    public function viewExcluirUsuarios() {
-        View::render("usuario/delete");
+    public function viewExcluirUsuarios($id) {
+        View::render("usuario/delete", ["id_usuario" => $id]);
         
+    }
+    public function relatorioUsuario($id, $data1, $data2){
+        View::render("usuario/delete",
+         ["id" => $id, "data1" =>$data1,"data2" =>$data2]);
     }
     public function salvarUsuarios() {
         UsuarioValidador::validarEntradas($_POST);

@@ -14,9 +14,9 @@ class Usuario{
     private $atualizado_em;
     private $excluido_em;
     private $db;
+    private $foto_usuario;
     //construtor inicializa a classe e/ou atributos
     public function __construct($db){
-        $this->nome_usuario = 'lucas';
         $this->db = $db;
     }
 
@@ -29,23 +29,24 @@ function buscaUsuarios(){
     return $resultado = $statment->fetchAll();
 
 }
-function buscaUsuarioPorEmail($email = ''){
+function buscaUsuarioPorEmail($email){
     $sql = 'SELECT nome_usuario, email_usuario FROM tbl_usuario WHERE email_usuario = :email';
     $statment = $this->db->prepare($sql);
     $statment->bindParam(':email', $email);
     $statment->execute();
     return $resultado = $statment->fetchAll();
-    
 }
-function RegistraUsuario( $nome, $email, $senha){
-    $sql = 'INSERT INTO tbl_usuario (nome_usuario, email_usuario, senha_usuario) 
-    VALUES (:nome, :email, :senha)';
+
+function RegistraUsuario( $nome, $email, $senha, $tipo_usuario, $status_usuario, $foto_usuario){
+    $sql = 'INSERT INTO tbl_usuario (nome_usuario, email_usuario, senha_usuario,foto_usuario, tipo_usuario, status_usuario) 
+    VALUES (:nome, :email, :senha , :foto, :tipo, :status)';
     $statment = $this->db->prepare($sql);
     $statment->bindParam(':nome', $nome);
     $statment->bindParam(':email', $email);
-    $statment->bindParam(':senha',password_hash( $senha, PASSWORD_bCRYPT));
+    $statment->bindParam(':senha',password_hash( $senha, 'PASSWORD_bCRYPT'));
     $statment->bindParam(':tipo', $tipo_usuario);
     $statment->bindParam(':status', $status_usuario);
+    $statment->bindParam(':foto', $foto_usuario);
     if($statment->execute()){
         return $this->db->lastInsertId();
         } else {
@@ -85,13 +86,14 @@ function atualizarUsuario($id, $nome, $email, $senha = null, $tipo = null, $stat
         $stmt->bindParam(':id', $id);
         return $stmt->execute();
     }
-}
+
 function buscaUsuariosPorID($id){
-    $sql = 'SELECT nome_usuario, email_usuario FROM tbl_usuario WHERE id_usuario = :id';
+    $sql = 'SELECT * FROM tbl_usuario WHERE id_usuario = :id_usuario';
     $statment = $this->db->prepare($sql);
-    $statment->bindParam(':id', $id);
+    $statment->bindParam(':id_usuario', $id);
     return $statment->execute();
     
+}
 }
 
 // $ok = RegistraUsuario($db, 'João Silva', 'joaosilva@kkkkk.com', '123456');
