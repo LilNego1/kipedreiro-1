@@ -1,4 +1,3 @@
-<div>sou o create</div>
 <?php foreach($usuario as $usuario); ?>
 <form action="/backend/usuarios/atualizar/ <?php echo $usuario['id_usuario'];?>" method="post" enctype="multipart/form-data"></form>
 <label for="text"> nome</label>

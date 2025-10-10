@@ -118,6 +118,12 @@ public function paginacao(int $pagina = 1, int $por_pagina = 10): array{
             'para' => $offset + count($dados)
         ];
     }
+    function totalDeUsuarios(){
+        $sql = "SELECT count(*) as total From tbl_usuario";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }   
 }
 
 // $ok = RegistraUsuario($db, 'João Silva', 'joaosilva@kkkkk.com', '123456');

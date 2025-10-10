@@ -26,9 +26,9 @@ class UsuarioController {
         // Example method code here
     }
 
-    public function viewListarUsuarios(){
-        $dados = $this->usuario->buscaUsuarios();
-        $total = $this->usuario->paginacao();
+    public function viewListarUsuarios($pagina){
+        $dados = $this->usuario->paginacao($pagina);
+        $total = $this->usuario->totalDeUsuarios();
         $dados['total'] = $total[0];
         View::render("usuario/index", [
             "usuarios=> $dados",

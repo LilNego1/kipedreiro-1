@@ -13,7 +13,7 @@ class Rotas
         "/usuario/criar" => "UsuarioController@viewCriarUsuarios",
         "/usuario/editar/{id}" => "UsuarioController@viewEditarUsuarios",
         "/usuario/excluir/{id}" => "UsuarioController@viewExcluirUsuarios",
-        "/usuario/listar{id}" => "UsuarioController@viewListarUsuarios",
+        "/usuario/listar/{pagina}" => "UsuarioController@viewListarUsuarios",
     ],
     "POST" => [
         "/usuario/salvar" => "UsuarioController@salvarUsuarios",
