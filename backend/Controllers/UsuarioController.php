@@ -26,11 +26,20 @@ class UsuarioController {
         // Example method code here
     }
 
-    public function viewListarUsuarios() {
+    public function viewListarUsuarios(){
         $dados = $this->usuario->buscaUsuarios();
-        View::render("usuario/index", ["usuarios" => $dados]);
-        
+        $total = $this->usuario->paginacao();
+        $dados['total'] = $total[0];
+        View::render("usuario/index", [
+            "usuarios=> $dados",
+            "total_usuarios" => $total[0],
+            "total_inativos" => 22,
+            "total_ativos" => 12,
+        ]);
+ 
     }
+        
+    
     public function viewCriarUsuarios() {
         View::render("usuario/create");
         
