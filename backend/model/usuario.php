@@ -37,7 +37,7 @@ function buscaUsuarioPorEmail($email){
     return $resultado = $statment->fetchAll();
 }
 
-function RegistraUsuario( $nome, $email, $senha, $tipo_usuario, $status_usuario, $foto_usuario){
+function inserirUsuario( $nome, $email, $senha, $tipo_usuario, $status_usuario, $foto_usuario){
     $sql = 'INSERT INTO tbl_usuario (nome_usuario, email_usuario, senha_usuario,foto_usuario, tipo_usuario, status_usuario) 
     VALUES (:nome, :email, :senha , :foto, :tipo, :status)';
     $statment = $this->db->prepare($sql);
@@ -119,11 +119,37 @@ public function paginacao(int $pagina = 1, int $por_pagina = 10): array{
         ];
     }
     function totalDeUsuarios(){
-        $sql = "SELECT count(*) as total From tbl_usuario";
+        $sql = "SELECT count(*) as total FROM tbl_usuario";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
-    }   
+    } 
+    function totalDeUsuariosInativos(){
+        $sql = "SELECT count(*) as total FROM tbl_usuario where excluido_em IS NOT NULL";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+ 
+    function totalDeUsuariosAtivos(){
+        $sql = "SELECT count(*) as total FROM tbl_usuario where excluido_em IS NULL";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+// parte de autenticação de usuário
+    public function checarCredenciais(string $email, string $senha){
+        $usuario = $this->buscaUsuarioPorEmail($email);
+        if(count($usuario) !== 1){
+            return false;
+        }
+        $usuario = $usuario[0];
+        if(password_verify($senha, $usuario['senha_usuario'])){
+            return $usuario;
+        }
+        return false;
+    }
+
 }
 
 // $ok = RegistraUsuario($db, 'João Silva', 'joaosilva@kkkkk.com', '123456');

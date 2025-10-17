@@ -1,5 +1,5 @@
 <?php
-namespace App\Kipedreiro\Core;
+namespace App\backend\Core;
 class flash
 {
     public static function set($tipo, $mensagem)

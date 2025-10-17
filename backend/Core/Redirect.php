@@ -1,6 +1,6 @@
 <?php
-namespace App\Kipedreiro\Core;
-use App\Kipedreiro\Core\flash;
+namespace App\backend\Core;
+use App\backend\Core\flash;
 class Redirect
 {
     public static function redirecionarPara($url){

@@ -1,10 +1,10 @@
 <?php
-namespace App\Kipedreiro;
+namespace App\Backend;
 require __DIR__ .'/../vendor/autoload.php';
 
 use Bramus\Router\Router;
 $router = new Router();
-$router-> setNamespace('\App\Kipedreiro\Controllers');
+$router->setNamespace('\App\Backend\Controllers');
 use App\Backend\Rotas\Rotas;
 $rotas = Rotas::get();
 

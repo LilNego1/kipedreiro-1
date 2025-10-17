@@ -1,5 +1,5 @@
 <?php
-namespace App\Kipedreiro\Validadores;
+namespace App\backend\Validadores;
 
 class UsuarioValidador
 {

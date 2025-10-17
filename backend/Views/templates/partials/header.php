@@ -1,3 +1,9 @@
+<?php
+namespace App\Backend\Views\Templates\Partials;
+use App\Backend\Core\Session;
+use App\Backend\Core\Flash;
+?>
+
 
 <!DOCTYPE html>
 <html>
@@ -13,7 +19,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
 </head>
 <body class="w3-light-grey">
- 
+ <?php
+  $session = new Session();
+  if($session->has('usuario_id')){
+  ?>
 <!-- Top container -->
 <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
   <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
@@ -54,6 +63,22 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
  
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
- 
 <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+<?php
+}
+$mensagem = Flash::get();
+if(isset($mensagem)){
+  foreach($mensagem as $key => $value){
+    if($key === 'type'){
+      $tipo = $value == 'success' ? 'alert-sucess' : 'alert-danger';
+      echo "<div class='alert $tipo' role='alert'>";
+    }else{
+      echo $value;
+      echo "</div>";
+    }
+      
+  }
+}
+?>
     

@@ -10,7 +10,7 @@
 <input type="password" name="senha_usuario" id="senha_usuario"/>
 <br/>
 <label for="Tipo">tipo</label>
-<select name="tipo_usuario" id="tipo_usuario"></select>
+<select name="tipo_usuario" id="tipo_usuario">
     <option value="admin">admin</option>
     <option value="user">user</option>
 </select>

@@ -4,11 +4,14 @@ namespace App\Backend\Controllers;
 use App\Backend\Model\Usuario;
 use App\Backend\Database\Database;
 use App\Backend\Core\View;
-use App\Kipedreiro\Core\Redirect;
-use App\Kipedreiro\Validadores\UsuarioValidador;
+use App\backend\Core\Redirect;
+use App\backend\Validadores\UsuarioValidador;
 use App\Backend\Core\FileManager;
+use App\Backend\Controllers\Admin\AuthenticadedController;
+use App\Backend\Controllers\Admin\AdminController;
 
-class UsuarioController {
+
+class UsuarioController extends AuthenticadedController{
     public $usuario;
     public $db;
     public $gerenciarImagem;
@@ -26,17 +29,24 @@ class UsuarioController {
         // Example method code here
     }
 
-    public function viewListarUsuarios($pagina){
+    public function viewListarUsuarios($pagina=1){
+        if(empty($pagina) || $pagina <= 0){
+            $pagina = 1;
+        }
+        $totalAtivos = $this->usuario->totalDeUsuariosAtivos();
         $dados = $this->usuario->paginacao($pagina);
         $total = $this->usuario->totalDeUsuarios();
-        $dados['total'] = $total[0];
-        View::render("usuario/index", [
-            "usuarios=> $dados",
-            "total_usuarios" => $total[0],
-            "total_inativos" => 22,
-            "total_ativos" => 12,
-        ]);
- 
+        $totalInativos = $this->usuario->totalDeUsuariosInativos();
+       
+        View::render("usuario/index",
+        [
+        "usuarios"=> $dados['data'],
+         "total_usuarios"=> $total[0],
+         "total_inativos" => $totalInativos[0],
+         "total_ativos" => $totalAtivos[0],
+         'paginacao' => $dados
+        ]
+        );
     }
         
     
