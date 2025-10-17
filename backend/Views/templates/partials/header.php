@@ -1,5 +1,5 @@
 <?php
-namespace App\Backend\Views\Templates\Partials;
+
 use App\Backend\Core\Session;
 use App\Backend\Core\Flash;
 ?>

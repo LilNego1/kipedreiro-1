@@ -16,9 +16,9 @@ class Rotas
         "/usuario/listar/{pagina}" => "UsuarioController@viewListarUsuarios",
 
         // Rotas de autenticação
-        "/login" => "AuthControllers@login",
-        "/register" => "AuthControllers@register",
-        "/logout" => "AuthControllers@logout",
+        "/login" => "AuthController@login",
+        "/register" => "AuthController@register",
+        "/logout" => "AuthController@logout",
         "/admin/dashboard" => "Admin\dashboardController@index",
     ],
     "POST" => [
@@ -27,8 +27,8 @@ class Rotas
         "/usuario/deletar" => "UsuarioController@deletarUsuarios",
 
         // Rotas de autenticação
-        "/login" => "AuthControllers@autenticar",
-        "/register" => "AuthControllers@cadastrarUsuario",
+        "/login" => "AuthController@autenticar",
+        "/register" => "AuthController@cadastrarUsuario",
 ]
     ];
     }

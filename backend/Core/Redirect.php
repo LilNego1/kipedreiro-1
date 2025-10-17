@@ -1,6 +1,6 @@
 <?php
-namespace App\backend\Core;
-use App\backend\Core\flash;
+namespace App\Backend\Core;
+use App\Backend\Core\Flash;
 class Redirect
 {
     public static function redirecionarPara($url){
@@ -8,7 +8,7 @@ class Redirect
         exit;
     }
     public static function redirecionarComMensagem($url, $tipo, $mensagem){
-        flash::set($tipo, $mensagem);
+        Flash::set($tipo, $mensagem);
         self::redirecionarPara($url);
     }
     public static function voltarPaginaAnteriorComMensagem($tipo, $mensagem){

@@ -1,6 +1,6 @@
 <?php
-namespace App\backend\Core;
-class flash
+namespace App\Backend\Core;
+class Flash
 {
     public static function set($tipo, $mensagem)
     {

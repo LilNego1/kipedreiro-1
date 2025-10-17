@@ -1,7 +1,9 @@
 <?php
 namespace App\Backend;
 require __DIR__ .'/../vendor/autoload.php';
-
+ if (!isset($_SESSION)) {
+            session_start();
+        }
 use Bramus\Router\Router;
 $router = new Router();
 $router->setNamespace('\App\Backend\Controllers');

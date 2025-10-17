@@ -1,7 +1,7 @@
 <?php
 namespace App\Backend\Controllers\Admin;
-use App\backend\Core\Redirect;
-use App\backend\Core\Session;
+use App\Backend\Core\Redirect;
+use App\Backend\Core\Session;
 
 abstract class AuthenticadedController{
     protected Session $session;

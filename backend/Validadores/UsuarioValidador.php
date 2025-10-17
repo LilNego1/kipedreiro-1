@@ -1,5 +1,5 @@
 <?php
-namespace App\backend\Validadores;
+namespace App\Backend\Validadores;
 
 class UsuarioValidador
 {
@@ -19,8 +19,6 @@ class UsuarioValidador
         }elseif(strlen($dados['senha_usuario']) < 6){
          $erros[] = "o campo senha deve ter pelo menos 6 caracteres"; 
         }
-        var_dump($erros);
-        exit;
            return $erros;
     }
 }

@@ -4,8 +4,8 @@ namespace App\Backend\Controllers;
 use App\Backend\Model\Usuario;
 use App\Backend\Database\Database;
 use App\Backend\Core\View;
-use App\backend\Core\Redirect;
-use App\backend\Validadores\UsuarioValidador;
+use App\Backend\Core\Redirect;
+use App\Backend\Validadores\UsuarioValidador;
 use App\Backend\Core\FileManager;
 use App\Backend\Controllers\Admin\AuthenticadedController;
 use App\Backend\Controllers\Admin\AdminController;
@@ -16,6 +16,7 @@ class UsuarioController extends AuthenticadedController{
     public $db;
     public $gerenciarImagem;
     public function __construct() {
+        parent::__construct();
         $this->db = Database:: getInstance();
         $this->usuario = new Usuario($this->db);
         $this->gerenciarImagem = new FileManager('upload');
@@ -81,7 +82,8 @@ class UsuarioController extends AuthenticadedController{
             $_POST["email_usuario"],
             $_POST["senha_usuario"],
             $_POST["tipo_usuario"],
-            "ativo"
+            "ativo",
+            ''
          
          )){
             Redirect::redirecionarComMensagem("usuario/listar", "sucesso", "Usuario cadastrado com sucesso!!");

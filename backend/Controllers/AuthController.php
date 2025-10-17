@@ -1,15 +1,13 @@
 <?php
-namespace App\Backend\Controllers\Admin;
+namespace App\Backend\Controllers;
 use App\Backend\Model\Usuario;
 use App\Backend\Database\Database;
 use App\Backend\Core\View;
-use App\backend\Core\Redirect;
-use App\backend\Validadores\UsuarioValidador;
-use App\Backend\Core\FileManager;
-use App\backend\Core\Session;
-use App\backend\Core\Flash;
+use App\Backend\Core\Redirect;
+use App\Backend\Validadores\UsuarioValidador;
+use App\Backend\Core\Session;
 
-class AuthControllers{
+class AuthController{
     public $usuarioModel;
     public $session;
     public function __construct() {
@@ -17,7 +15,8 @@ class AuthControllers{
         $this->usuarioModel = new Usuario($db);
         $this->session = new Session(); 
     }
-    public function login(): void{
+    public function login(){
+       
         View::render("auth/login");
     }
     public function register(): void{
@@ -28,8 +27,8 @@ class AuthControllers{
         Redirect::redirecionarComMensagem('/login', 'success', 'Logout realizado com sucesso!');
     }
     public function autenticar():void {
-        $email = $_POST['email'] ?? null;
-        $senha = $_POST['senha'] ?? null;
+        $email = $_POST['email_usuario'] ?? null;
+        $senha = $_POST['senha_usuario'] ?? null;
         $usuario = $this->usuarioModel->checarCredenciais($email, $senha);
 
         if($usuario) {
@@ -39,7 +38,7 @@ class AuthControllers{
             $this->session->set('usuario_tipo', $usuario['tipo_usuario']);
             Redirect::redirecionarPara('/admin/dashboard');
         }else {
-            Redirect::redirecionarComMensagem('/backend/login', 'error', 'Email ou senha inválidos.');
+            Redirect::redirecionarComMensagem('login', 'error', 'Email ou senha inválidos.');
         }        
 }
     public function cadastrarUsuario(): void{
@@ -47,14 +46,14 @@ class AuthControllers{
         if(!empty($erros)) {
             Redirect::redirecionarComMensagem('/register', 'error', implode("<br>", $erros));
         }
-        $nome = $_POST['nome'] ?? null;
-        $email = $_POST['email'] ?? null;
-        $senha = $_POST['senha'] ?? null;
-        $senha_confirmacao = $_POST['senha_confirmacao'] ?? null;
+        $nome = $_POST['nome_usuario'] ?? null;
+        $email = $_POST['email_usuario'] ?? null;
+        $senha = $_POST['senha_usuario'] ?? null;
+        $senha_confirmacao = $_POST['senha_confirm'] ?? null;
         if($senha !== $senha_confirmacao) {
             Redirect::redirecionarComMensagem('/register', 'error', 'As senhas não coincidem.');
         }
-        if(!empty($this->usuarioModel->buscarPorEmail($email))) {
+        if(!empty($this->usuarioModel->buscaUsuarioPorEmail($email))) {
             Redirect::redirecionarComMensagem('/register', 'error', 'Email já está em uso.');
         }
         $novoUsuarioID = $this->usuarioModel->inserirUsuario($nome, $email, $senha, 'usuario','ativo','null' );

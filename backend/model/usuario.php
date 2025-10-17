@@ -38,12 +38,13 @@ function buscaUsuarioPorEmail($email){
 }
 
 function inserirUsuario( $nome, $email, $senha, $tipo_usuario, $status_usuario, $foto_usuario){
-    $sql = 'INSERT INTO tbl_usuario (nome_usuario, email_usuario, senha_usuario,foto_usuario, tipo_usuario, status_usuario) 
+   $senha = password_hash($senha, PASSWORD_BCRYPT);
+   $sql = 'INSERT INTO tbl_usuario (nome_usuario, email_usuario, senha_usuario,foto_usuario, tipo_usuario, status_usuario) 
     VALUES (:nome, :email, :senha , :foto, :tipo, :status)';
     $statment = $this->db->prepare($sql);
     $statment->bindParam(':nome', $nome);
     $statment->bindParam(':email', $email);
-    $statment->bindParam(':senha',password_hash( $senha, 'PASSWORD_bCRYPT'));
+    $statment->bindParam(':senha',$senha);
     $statment->bindParam(':tipo', $tipo_usuario);
     $statment->bindParam(':status', $status_usuario);
     $statment->bindParam(':foto', $foto_usuario);
@@ -70,7 +71,7 @@ function atualizarUsuario($id, $nome, $email, $senha = null, $tipo = null, $stat
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':email', $email);
         if($senha){
-            $stmt->bindParam(':senha', password_hash($senha, PASSWORD_BCRYPT));
+            $stmt->bindParam(':senha', $senha);
         }
         if($tipo){
             $stmt->bindParam(':tipo', $tipo);

@@ -1,5 +1,5 @@
 <?php
-namespace App\backend\Controllers\Admin;
+namespace App\Backend\Controllers\Admin;
 use App\backend\Core\Redirect;
 
 abstract class AdminController extends AuthenticadedController{
