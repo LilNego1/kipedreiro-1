@@ -23,7 +23,7 @@ class Usuario{
 /* Executa uma instrução preparada passando um array de valores */
 function buscaUsuarios(){
     
-    $sql = 'SELECT nome_usuario, email_usuario FROM tbl_usuario';
+    $sql = 'SELECT nome_usuario, email_usuario, senha_usuario FROM tbl_usuario';
     $statment = $this->db->prepare($sql, [PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY]);
     $statment->execute();
     return $resultado = $statment->fetchAll();
@@ -38,7 +38,7 @@ function buscaUsuarioPorEmail($email){
 }
 
 function inserirUsuario( $nome, $email, $senha, $tipo_usuario, $status_usuario, $foto_usuario){
-   $senha = password_hash($senha, PASSWORD_BCRYPT);
+   $senha = password_hash($senha, PASSWORD_DEFAULT);
    $sql = 'INSERT INTO tbl_usuario (nome_usuario, email_usuario, senha_usuario,foto_usuario, tipo_usuario, status_usuario) 
     VALUES (:nome, :email, :senha , :foto, :tipo, :status)';
     $statment = $this->db->prepare($sql);
@@ -145,6 +145,7 @@ public function paginacao(int $pagina = 1, int $por_pagina = 10): array{
             return false;
         }
         $usuario = $usuario[0];
+       
         if(password_verify($senha, $usuario['senha_usuario'])){
             return $usuario;
         }
