@@ -3,25 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>novonovo</title>
+    <title>Nossos Serviços - Ki-Pedreiro</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsivo.css">
-    <link rel="stylesheet" href="Fontes/font-awesome-4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <header id="navbar">
+<header class="cabecalho">
+        <div class="cabecalho__barra-superior">
+            <div class="container">
+                <span><img src="assets/img/icon/001-phone-receiver-silhouette.png" alt="Ícone Telefone"> (11) 9 4802-0922</span>
+                <span><img src="assets/img/icon/019-email-1.png" alt="Ícone Email"> contato@kipedreiro.com.br</span>
+                <a href="#" class="cabecalho__login"><img src="assets/img/icon/017-profile-user-1.png" alt="Ícone Login"> Login</a>
+            </div>
+        </div>
+        <nav class="cabecalho__principal">
+            <div class="container">
+                <a href="index.html">
+                    <img src="/assets/img/logo/KiPedreiro.png" alt="Logo Ki-Pedreiro" class="cabecalho__logo">
+                </a>
+                <ul class="cabecalho__menu">
+                    <li><a href="index.html" class="cabecalho__link cabecalho__link--ativo">Home</a></li>
+                    <li><a href="#" class="cabecalho__link">Sobre</a></li>
+                    <li><a href="projetos.html" class="cabecalho__link">Portfólio</a></li>
+                    <li><a href="servicos.html" class="cabecalho__link">Serviços</a></li>
+                    <li><a href="#" class="cabecalho__link">Área de atuação</a></li>
+                    <li><a href="contato.html" class="cabecalho__link">Contato</a></li>
+                </ul>
+            </div>
+        </nav>
     </header>
-    <main>
-        <section>
-            <h1>Bem vindo ao site</h1>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione sunt unde voluptatum quasi earum obcaecati adipisci, minima velit labore nihil minus aperiam nobis dolor, aliquam, voluptatibus distinctio harum suscipit voluptatem?
-            </p>
-        </section>
-        <div class="botao-flutuante cor"><i class="fa fa-whatsApp fa-2x" aria-hidden="true"></i></div>
-    </main>
-    <footer id="footer">
+<main>
+    <section class="servicos">
+            <div class="container">
+                <div class="servicos__lista">
+                   
+                </div>
+            </div>
+    </section>
+</main>
+ 
+    <footer class="rodape">
+        <div class="container">
+            <div class="rodape__grid">
+                <div class="rodape__coluna">
+                    <h4 class="rodape__titulo">Navegação</h4>
+                    <ul class="rodape__lista-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Sobre Nós</a></li>
+                        <li><a href="servicos.html">Serviços</a></li>
+                        <li><a href="projetos.html">Portfólio</a></li>
+                        <li><a href="#">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="rodape__coluna">
+                    <h4 class="rodape__titulo">Contato</h4>
+                    <p>(11) 9 4802-0922</p>
+                    <p>contato@kipedreiro.com.br</p>
+                    <p>Rua Exemplo, 123 - São Paulo, SP</p>
+                </div>
+                 <div class="rodape__coluna">
+                    <h4 class="rodape__titulo">Siga-nos</h4>
+                    <div class="rodape__redes-sociais">
+                        <a href="#"><img src="assets/img/icon/facebook.svg" alt="Facebook"></a>
+                        <a href="#"><img src="assets/img/icon/instagram.svg" alt="Instagram"></a>
+                        <a href="#"><img src="assets/img/icon/linkedin.svg" alt="LinkedIn"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="rodape__direitos">
+                <p>&copy; 2025 Ki-Pedreiro. Todos os direitos reservados.</p>
+            </div>
+        </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const botaoFlutuante = document.querySelector('.servicos__lista');
+            if (!container) return;
+            container.innerHtml = '';
+            fetch('/backend/api/servicos')
+            .then (response => {
+                if (!response.ok) {
+                throw new Error('Erro ao carregar os serviços');
+            }
+            return response.json();
+        })
+        .then(json => {
+            if(json.status !== 'sucess' || !json.data){
+                throw new Error('Resposta inválida da API:' + (json.message || 'Formato invalido'));
+            }
+            container.innerHtml = '';
+            json.data.forEach(servico => {
+                const Cardhtml = `
+                <div class="card" data-servico="${servico.nome.servico.toLowerCase()}">
+                    <div class="card__frente" style="background-image: url('${servico.caminho_imagem}')">
+                        <h3 class="card__titulo">${servico.nome_servico.toUpperCase()}</h3>
+                        </div>
+                        <div class="card__verso">
+                            <h3 class="card__descricao">${servico.descricao_servico.toUpperCase()}</h3>
+                            <p class="card__descricao">${servico.descricao_servico}</p>
+                        </div>
+                </div>
+                `;
+                container.insertAdjacentHTML('beforeend', Cardhtml);
+            });
+        })
+            .catch (error => {
+                console.error('Erro ao carregar os serviços:', error);
+                container.innerHtml = `<p class="erro">Erro ao carregar os serviços:</p>`;
+            })
+        })
+    </script>
     <script src="js/footer.js" defer></script>
     <script src="js/navbar.js" defer></script>
     <script src="js/App.js" defer></script>

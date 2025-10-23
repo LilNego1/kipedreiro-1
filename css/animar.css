@@ -1,0 +1,21 @@
+.card.is-flipped .card__frente {
+    transform: rotateY(-180deg);
+}
+.card.is-flipped .card__verso {
+    transform: rotateY(0deg);
+}
+ 
+.processos__item {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+ 
+.processos__item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+ 
+.processos__item:nth-child(2) { transition-delay: 0.1s; }
+.processos__item:nth-child(3) { transition-delay: 0.2s; }
+.processos__item:nth-child(4) { transition-delay: 0.3s; }

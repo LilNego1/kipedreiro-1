@@ -1,52 +1,100 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>novonovo</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsivo.css">
-    <link rel="stylesheet" href="Fontes/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="contato.css">
+    <title>Nossos Serviços - Ki-Pedreiro</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
-    <header id="navbar">
-    </header>
-    <main>
-        <section>
+<header class="cabecalho">
+        <div class="cabecalho__barra-superior">
             <div class="container">
-                <h2>Contato</h2>
-            <Form action="enviarcntt.php" method="post" class="forms">
-                <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Nome</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1">
-                </div>
-                <div class="mb-3">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">Assunto</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div>
-                <button type="submit">enviar</button>
-
-                </label>
-
-
-
-            </Form>
+                <span><img src="assets/img/icon/001-phone-receiver-silhouette.png" alt="Ícone Telefone"> (11) 9 4802-0922</span>
+                <span><img src="assets/img/icon/019-email-1.png" alt="Ícone Email"> contato@kipedreiro.com.br</span>
+                <a href="#" class="cabecalho__login"><img src="assets/img/icon/017-profile-user-1.png" alt="Ícone Login"> Login</a>
             </div>
-            <p>
-
-            </p>
+        </div>
+        <nav class="cabecalho__principal">
+            <div class="container">
+                <a href="index.html">
+                    <img src="/assets/img/logo/KiPedreiro.png" alt="Logo Ki-Pedreiro" class="cabecalho__logo">
+                </a>
+                <ul class="cabecalho__menu">
+                    <li><a href="index.html" class="cabecalho__link cabecalho__link--ativo">Home</a></li>
+                    <li><a href="#" class="cabecalho__link">Sobre</a></li>
+                    <li><a href="projetos.html" class="cabecalho__link">Portfólio</a></li>
+                    <li><a href="servicos.html" class="cabecalho__link">Serviços</a></li>
+                    <li><a href="#" class="cabecalho__link">Área de atuação</a></li>
+                    <li><a href="contato.html" class="cabecalho__link">Contato</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+<main>
+    <section class="servicos">
+        <form action="enviaemail.php" method="post">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" required>
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required>
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" required>
+            <button type="submit" >Cadastrar</button>
+        </form>
         </section>
-        <div class="botao-flutuante cor"><i class="fa fa-whatsApp fa-2x" aria-hidden="true"></i></div>
-    </main>
-    <footer id="footer">
+            </main>
+ 
+    <footer class="rodape">
+        <div class="container">
+            <div class="rodape__grid">
+                <div class="rodape__coluna">
+                    <h4 class="rodape__titulo">Navegação</h4>
+                    <ul class="rodape__lista-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Sobre Nós</a></li>
+                        <li><a href="servicos.html">Serviços</a></li>
+                        <li><a href="projetos.html">Portfólio</a></li>
+                        <li><a href="#">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="rodape__coluna">
+                    <h4 class="rodape__titulo">Contato</h4>
+                    <p>(11) 9 4802-0922</p>
+                    <p>contato@kipedreiro.com.br</p>
+                    <p>Rua Exemplo, 123 - São Paulo, SP</p>
+                </div>
+                 <div class="rodape__coluna">
+                    <h4 class="rodape__titulo">Siga-nos</h4>
+                    <div class="rodape__redes-sociais">
+                        <a href="#"><img src="assets/img/icon/facebook.svg" alt="Facebook"></a>
+                        <a href="#"><img src="assets/img/icon/instagram.svg" alt="Instagram"></a>
+                        <a href="#"><img src="assets/img/icon/linkedin.svg" alt="LinkedIn"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="rodape__direitos">
+                <p>&copy; 2025 Ki-Pedreiro. Todos os direitos reservados.</p>
+            </div>
+        </div>
     </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+        let headersList = {
+ "Accept": "*/*",
+ "User-Agent": "Thunder Client (https://www.thunderclient.com)"
+}
+
+let response = await fetch("https://openlibrary.org/search.json?q=the%2Blord%2Bof%2Bthe%2Brings", { 
+  method: "GET",
+  headers: headersList
+});
+
+let data = await response.json();
+console.log(data);
+        });
+
+    </script>
     <script src="js/footer.js" defer></script>
     <script src="js/navbar.js" defer></script>
     <script src="js/App.js" defer></script>

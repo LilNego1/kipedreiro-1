@@ -29,13 +29,13 @@ function buscaUsuarios(){
     return $resultado = $statment->fetchAll();
 
 }
-function buscaUsuarioPorEmail($email){
-    $sql = 'SELECT nome_usuario, email_usuario FROM tbl_usuario WHERE email_usuario = :email';
-    $statment = $this->db->prepare($sql);
-    $statment->bindParam(':email', $email);
-    $statment->execute();
-    return $resultado = $statment->fetchAll();
-}
+function buscaUsuarioPorEMail($email){
+        $sql = "SELECT * FROM tbl_usuario where email_usuario = :email";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 function inserirUsuario( $nome, $email, $senha, $tipo_usuario, $status_usuario, $foto_usuario){
    $senha = password_hash($senha, PASSWORD_DEFAULT);
